@@ -66,4 +66,29 @@ const employeeStat = () => {
     };
 })};
 
+const allDept = () => {
+  console.log("Showing All Departments");
+};
+
+const allRoles = () => {
+  console.log("Showing All Roles");
+};
+
+const allEmpl = () => {
+  console.log("Showing All Employees");
+};
+
+// const addDep = () => {
+//   inquirer
+//     .prompt([
+//       {
+//         name: "name",
+//         type: "input",
+//         message: "What department would you like to add?",
+//       },
+//     ])
+//     .then((answer) => {
+//       console.log(`Adding department ${answer.name}...`);
+//     });
+// };
 
