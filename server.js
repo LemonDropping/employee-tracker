@@ -1,15 +1,19 @@
+// requiring all of my npm packages
 const express = require('express');
-const fs = require("fs");
 const { default: inquirer } = require('inquirer');
 const mysql = require('mysql2');
 
+// port host location
 const PORT = process.env.PORT || 3001;
+
+// creating the app for request
 const app = express();
+
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-
+// creating connection to the database
 const db = mysql.createConnection(
   {
     host: 'localhost', 
@@ -20,6 +24,7 @@ const db = mysql.createConnection(
   console.log(`Connected to database`)
 );
 
+// setting up the inquirer prompts for gathering the employee info
 const employeeStat = () => {
   inquirer
     .prompt ([
@@ -37,8 +42,11 @@ const employeeStat = () => {
         ],
       },
     ])
+
+// Once the user has provided an response, the corresponding function will return
 .then ((answer) => {
   switch (answer.employeeStat) {
+    
     case "Departments":
       allDept();
       break;
@@ -64,7 +72,7 @@ const employeeStat = () => {
       break;
     };
 })};
-
+// the variables below log out when each one of the relevant data is being shown
 const allDept = () => {
   console.log("Showing All Departments");
 };
@@ -77,6 +85,7 @@ const allEmpl = () => {
   console.log("Showing All Employees");
 };
 
+// the user can add a role using the inquirer questions below
 const addDept = () => {
   inquirer
     .prompt([
@@ -91,6 +100,7 @@ const addDept = () => {
     });
 };
 
+// enables the ability to add a role to an employee
 const addRole = () => {
   inquirer
     .prompt([
@@ -105,6 +115,7 @@ const addRole = () => {
         message: "What is the salary for this employees role?",
       },
     ])
+    // statement that logs out the employee role and their salary based on the answer
     .then((answer) => {
       console.log(
         `Adding role ${answer.title} with salary ${answer.salary}...`
@@ -112,7 +123,8 @@ const addRole = () => {
     });
 };
 
-const addEmp = () => {
+// allows the user to update their employees information based on their full name, role and manager id
+const updateEmpl = () => {
   inquirer
     .prompt([
       {
